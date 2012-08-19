@@ -11,8 +11,8 @@ module AuthN
     end
 
     module ClassMethods
-      def self.has_authentication(options = {})
-        options = oopts.empty? ? AuthN::DEFAULTS.dup.merge!(options) : AuthN::DEFAULTS
+      def self.has_authentication(o = {})
+        options = o.empty? ? AuthN::DEFAULTS.merge(o) : AuthN::DEFAULTS
         define_authenticate_method
       end
 
