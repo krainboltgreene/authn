@@ -17,8 +17,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  # gem.runtime_dependency 'gemname', '~> 1.0'
-  gem.development_dependency 'yard'
-  gem.development_dependency 'kramdown'
-  # gem.development_dependency 'gemname', '~> 1.0'
+  # gem.add_runtime_dependency 'gemname', '~> 1.0'
+  gem.add_development_dependency 'yard'
+  gem.add_development_dependency 'kramdown'
+  # gem.add_development_dependency 'gemname', '~> 1.0'
 end
