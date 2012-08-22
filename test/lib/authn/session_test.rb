@@ -32,12 +32,12 @@ class TestAuthNSession < MiniTest::Unit::TestCase
 
   def test_that_login_sets_session
     Controller.login email: "kurtis@example.com", password: "12341234"
-    assert Controller.session[:session_Account_id]
+    assert Controller.session[:session_account_id]
   end
 
   def test_that_login_stores_session_account_id
     instance = Controller.login email: "kurtis@example.com", password: "12341234"
-    actual = Controller.session[:session_Account_id]
+    actual = Controller.session[:session_account_id]
     expected = instance.id
     assert_equal expected, actual
   end
