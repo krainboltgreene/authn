@@ -31,6 +31,8 @@ To start using authn you simply need to install and hook up to your existing "us
 #
 
 class Account < ActiveRecord::Base
+  include AuthN::Model
+
   has_authentication
   has_secure_password
 
@@ -73,6 +75,8 @@ We'll you can see their own pages, but here's a taste:
 #
 
 class Account < ActiveRecord::Base
+  include AuthN::Model
+
   has_authentication
   has_password_recovery mailer: PasswordRecoveryMailer
   has_activation mailer: ActivationMailer, on_create: false
