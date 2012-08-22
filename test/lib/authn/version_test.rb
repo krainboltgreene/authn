@@ -7,6 +7,6 @@ class TestAuthNVersion < MiniTest::Unit::TestCase
   end
 
   def test_that_version_is_latest
-    assert_equal("1.0.0", AuthN::VERSION)
+    assert_equal "1.0.0", AuthN::VERSION
   end
 end
