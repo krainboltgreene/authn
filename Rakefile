@@ -17,7 +17,7 @@ Bundler::GemHelper.install_tasks
 desc "Run all of the tests"
 Rake::TestTask.new do |config|
   config.libs << 'test'
-  config.pattern = 'test/**/test_*'
+  config.pattern = 'test/**/*_test*'
   config.verbose = true
   config.warning = true
 end
