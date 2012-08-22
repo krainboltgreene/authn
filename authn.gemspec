@@ -18,6 +18,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   # gem.add_runtime_dependency 'gemname', '~> 1.0'
+  gem.add_runtime_dependency 'activemodel', '~> 3.0'
+  gem.add_runtime_dependency 'bcrypt-ruby', '~> 3.0'
   gem.add_development_dependency 'yard'
   gem.add_development_dependency 'kramdown'
   # gem.add_development_dependency 'gemname', '~> 1.0'
