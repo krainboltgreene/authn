@@ -13,8 +13,9 @@ module AuthN
         config options
       end
 
-        # Define the authenticate method on the class
-        define_authenticate_method
+      def config(options = {})
+        @@config ||= options
+        @@config.merge! options
       end
 
       def self.authenticate(identifers = {}, password)
