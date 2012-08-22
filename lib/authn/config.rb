@@ -4,7 +4,9 @@ module AuthN
   end
 
   class Config < OpenStruct
-    DEFAULTS = { }
+    DEFAULTS = {
+      :account_klass => :Account
+    }
 
   end
 end
