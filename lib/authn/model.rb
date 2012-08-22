@@ -5,9 +5,13 @@ module AuthN
     end
 
     module ClassMethods
-      def self.has_authentication(o = {})
-        # Merge the provided options with defaults, if any options provided
-        options = o.empty? ? AuthN::DEFAULTS.merge(o) : AuthN::DEFAULTS
+      def has_authentication(o = {})
+        options = {}
+        options.merge! AuthN::Config::DEFAULTS
+        options.merge! AuthN.config if AuthN.config.to_hash
+        options.merge! o unless o.empty?
+        config options
+      end
 
         # Define the authenticate method on the class
         define_authenticate_method
