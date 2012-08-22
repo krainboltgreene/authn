@@ -37,7 +37,7 @@ class Account < ActiveRecord::Base
   has_secure_password
 
   validates :email, uniqueness: true, presence: true, length: 5..255
-  validates :password, confirmation: true, length: 10..1024
+  validates :password, length: 10..1024
 
   attr_accessible :email
   attr_accessible :password, :password_confirmation
@@ -84,7 +84,7 @@ class Account < ActiveRecord::Base
   has_secure_password
 
   validates :email, uniqueness: true, presence: true, length: 5..255
-  validates :password, confirmation: true, length: 10..1024
+  validates :password, length: 10..1024
 
   attr_accessible :email
   attr_accessible :password, :password_confirmation
