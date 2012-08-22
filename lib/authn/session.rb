@@ -28,7 +28,7 @@ module AuthN
       private
 
       def generate_session_and_instance_from(instance)
-         if instance then instance_and_session instance else false end
+        instance.tap { instance_and_session instance if instance }
       end
 
       def instance_and_session(instance)
