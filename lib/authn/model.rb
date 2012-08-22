@@ -19,6 +19,9 @@ module AuthN
       end
 
       def authenticate(identifiers = {})
+        # Extract the password from the identifiers
+        password = identifiers.delete :password
+
         # Find the documents that match the criteria
         criteria = where identifiers
 
