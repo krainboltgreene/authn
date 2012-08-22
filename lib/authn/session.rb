@@ -6,7 +6,7 @@ module AuthN
 
     module ClassMethods
       def login(identifiers, klass = AuthN.config.account_klass)
-        generate_session_and_instance_from const_get(klass).authenticate identifiers
+        generate_session_and_instance_from find_instance_klass(klass).authenticate identifiers
       end
 
       def auto_login(instance)
@@ -15,18 +15,22 @@ module AuthN
 
       def logged_in?(instance = nil, klass = AuthN.config.account_klass)
         klass = instance.class if instance
-        klass = const_get(klass) unless instance
+        klass = find_instance_klass klass unless instance
         check_session klass
       end
 
       def logout(instance = nil, klass = AuthN.config.account_klass)
         klass = instance.class if instance
-        klass = const_get(klass) unless instance
+        klass = find_instance_klass klass unless instance
         destroy_session klass
       end
 
       private
 
+
+      def find_instance_klass(klass)
+        const_get klass.capitalize
+      end
       def generate_session_and_instance_from(instance)
         instance.tap { instance_and_session instance if instance }
       end
