@@ -6,9 +6,12 @@ class TestAuthNConfig < MiniTest::Unit::TestCase
 
   end
 
-  def test_
-    actual =
-    expected =
+  # def self.config
+  #   @config ||= Config.new
+  # end
+  def test_config_returns_config_object
+    actual = AuthN.config.class
+    expected = AuthN::Config
     assert_equal expected, actual
   end
 end
