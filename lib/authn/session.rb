@@ -53,7 +53,11 @@ module AuthN
       end
 
       def check_session(klass)
-        session[:"session_#{klass}_id"].present?
+        get_session(klass).present?
+      end
+
+      def get_session(klass)
+        session[:"session_#{klass_as_name(klass)}_id"]
       end
     end
   end
