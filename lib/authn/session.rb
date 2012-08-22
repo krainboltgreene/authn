@@ -31,6 +31,11 @@ module AuthN
       def find_instance_klass(klass)
         const_get klass.capitalize
       end
+
+      def klass_as_name(klass)
+        klass.name.downcase
+      end
+
       def generate_session_and_instance_from(instance)
         instance.tap { instance_and_session instance if instance }
       end
@@ -40,11 +45,11 @@ module AuthN
       end
 
       def create_session(klass, instance)
-        session[:"session_#{klass}_id"] = instance.id
+        session[:"session_#{klass_as_name(klass)}_id"] = instance.id
       end
 
       def destroy_session(klass)
-        session.delete :"session_#{klass}_id"
+        session.delete :"session_#{klass_as_name(klass)}_id"
       end
 
       def check_session(klass)
