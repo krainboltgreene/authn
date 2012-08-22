@@ -25,8 +25,13 @@ module AuthN
         destroy_session klass
       end
 
-      private
+      def current_user(klass = AuthN.config.account_klass)
+        @current_user ||= get_session klass_as_name klass
+      end
 
+      alias_method :current_account, :current_user
+
+      private
 
       def find_instance_klass(klass)
         const_get klass.capitalize
