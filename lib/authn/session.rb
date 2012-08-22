@@ -6,7 +6,7 @@ module AuthN
 
     module ClassMethods
       def login(identifiers, klass = AuthN.config.account_klass)
-        generate_session_and_instance_from klass.authenticate identifiers
+        generate_session_and_instance_from const_get(klass).authenticate identifiers
       end
 
       def auto_login(instance)
