@@ -18,7 +18,7 @@ module AuthN
         @@config.merge! options
       end
 
-      def self.authenticate(identifers = {}, password)
+      def authenticate(identifiers = {})
         # Find the documents that match the criteria
         criteria = where identifiers
 
