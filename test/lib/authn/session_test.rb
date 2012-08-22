@@ -54,7 +54,7 @@ class TestAuthNSession < MiniTest::Unit::TestCase
 
   def test_that_auto_login_sets_session
     instance = Controller.auto_login Account.new
-    assert Controller.session[:session_Account_id]
+    assert Controller.session.has_key? :session_account_id
   end
 
   def test_that_auto_login_stores_session_account_id
@@ -93,6 +93,6 @@ class TestAuthNSession < MiniTest::Unit::TestCase
   def test_that_logout_empties_the_session
     Controller.login email: "kurtis@example.com", password: "12341234"
     Controller.logout
-    assert_nil Controller.session[:session_Account_id]
+    refute Controller.session.has_key? :session_account_id
   end
 end
