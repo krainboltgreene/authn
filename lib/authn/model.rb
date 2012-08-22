@@ -23,7 +23,7 @@ module AuthN
         criteria = where identifiers
 
         # Get the first document that matches the criteria
-        instance = critera.first
+        instance = criteria.first
 
         # Check to see if the instance exists and if a password was given
         if instance && password
