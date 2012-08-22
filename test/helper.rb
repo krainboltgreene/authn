@@ -45,7 +45,7 @@ class Account
   end
 
   def id
-    rand(100000)
+    @id ||= rand(100000)
   end
 end
 
