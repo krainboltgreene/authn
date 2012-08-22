@@ -59,7 +59,7 @@ class TestAuthNSession < MiniTest::Unit::TestCase
 
   def test_that_auto_login_stores_session_account_id
     instance = Controller.auto_login Account.new
-    actual = Controller.session[:session_Account_id]
+    actual = Controller.session[:session_account_id]
     expected = instance.id
     assert_equal expected, actual
   end
