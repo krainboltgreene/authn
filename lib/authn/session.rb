@@ -15,11 +15,13 @@ module AuthN
 
       def logged_in?(instance = nil, klass = AuthN.config.account_klass)
         klass = instance.class if instance
+        klass = const_get(klass) unless instance
         check_session klass
       end
 
       def logout(instance = nil, klass = AuthN.config.account_klass)
         klass = instance.class if instance
+        klass = const_get(klass) unless instance
         destroy_session klass
       end
 
