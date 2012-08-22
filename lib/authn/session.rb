@@ -40,7 +40,7 @@ module AuthN
       end
 
       def destroy_session(klass)
-        session[:"session_#{klass}_id"] = nil
+        session.delete :"session_#{klass}_id"
       end
 
       def check_session(klass)
