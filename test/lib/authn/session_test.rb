@@ -53,7 +53,7 @@ class TestAuthNSession < MiniTest::Unit::TestCase
   end
 
   def test_that_auto_login_sets_session
-    instance = Controller.auto_login Account.new
+    Controller.auto_login Account.new
     assert Controller.session.has_key? :session_account_id
   end
 
