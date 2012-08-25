@@ -11,6 +11,9 @@ module AuthN
       login_password_key: :password,
       model_id_method: :id,
       model_critera_method: :where,
+      session_key_function: ->(klass) {
+        :"session_#{klass}_id"
+      }
     }
 
   end
