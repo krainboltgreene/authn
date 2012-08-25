@@ -50,11 +50,13 @@ module AuthN
       end
 
       def create_session(klass, instance)
-        session[:"session_#{klass_as_name(klass)}_id"] = instance.id
+        key = AuthN.config.session_key_function.call klass_as_name klass
+        session[key] = instance.send AuthN.config.model_id_method
       end
 
       def destroy_session(klass)
-        session.delete :"session_#{klass_as_name(klass)}_id"
+        key = AuthN.config.session_key_function.call klass_as_name klass
+        session.delete key
       end
 
       def check_session(klass)
@@ -62,7 +64,8 @@ module AuthN
       end
 
       def get_session(klass)
-        session[:"session_#{klass_as_name(klass)}_id"]
+        key = AuthN.config.session_key_function.call klass_as_name klass
+        session[key]
       end
     end
   end
