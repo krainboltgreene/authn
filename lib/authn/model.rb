@@ -10,9 +10,12 @@ module AuthN
         config.merge! options
       end
 
-      def config(options = {})
-        @@config ||= options
-        @@config.merge! options
+      def config=(options)
+        @@config = options
+      end
+
+      def config
+        @@config ||= AuthN::Config.new
       end
 
       def authenticate(identifiers = {})
