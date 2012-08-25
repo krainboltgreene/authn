@@ -20,10 +20,10 @@ module AuthN
 
       def authenticate(identifiers = {})
         # Extract the password from the identifiers
-        password = identifiers.delete :password
+        password = identifiers.delete AuthN.config.login_password_key
 
         # Find the documents that match the criteria
-        criteria = where identifiers
+        criteria = send AuthN.config.model_critera_method, identifiers
 
         # Get the first document that matches the criteria
         instance = criteria.first
