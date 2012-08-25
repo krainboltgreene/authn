@@ -1,6 +1,6 @@
 module AuthN
   def self.config
-    @config ||= Config.new
+    @config ||= Config.new Config::DEFAULTS
   end
 
   class Config < OpenStruct
