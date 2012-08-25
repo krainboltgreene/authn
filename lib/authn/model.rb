@@ -6,10 +6,8 @@ module AuthN
 
     module ClassMethods
       def has_authentication(o = {})
-        options = AuthN::Config::DEFAULTS.dup
-        options.merge! AuthN.config if AuthN.config.to_hash
-        options.merge! o unless o.empty?
-        config options
+        options = AuthN.config.table.any? ? o.merge!(AuthN.config) : o
+        config.merge! options
       end
 
       def config(options = {})
