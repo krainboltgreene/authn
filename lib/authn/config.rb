@@ -15,6 +15,5 @@ module AuthN
         :"session_#{klass}_id"
       }
     }
-
   end
 end
