@@ -29,7 +29,7 @@ module AuthN
     private
 
     def find_instance_klass(klass)
-      const_get klass.capitalize
+      Object.const_get klass.capitalize
     end
 
     def klass_as_name(klass)
