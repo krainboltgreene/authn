@@ -31,11 +31,7 @@ module AuthN
         # Check to see if the instance exists and if a password was given
         if instance && password
           # Check to see if the instance can authenticate with password
-          if instance.authenticate password
-            instance
-          else
-            false
-          end
+          instance.authenticate(password) ? instance : false
         end
 
         # Return instance if account was found and password matched
