@@ -21,7 +21,7 @@ module AuthN
     end
 
     def current_user(klass = AuthN.config.account_klass)
-      @current_user ||= get_session klass_as_name klass
+      @current_user ||= get_session klass_as_name find_instance_klass klass
     end
 
     alias_method :current_account, :current_user
