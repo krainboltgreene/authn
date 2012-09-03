@@ -52,7 +52,5 @@ end
 
 class Controller
   include AuthN::Session
-  def self.session
-    @session ||= {}
-  end
+  attr_accessor :session
 end
