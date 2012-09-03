@@ -1,4 +1,4 @@
-require_relative '../lib/authn'
+require 'authn'
 
 module ActiveModel::Model
   def self.included(base)
