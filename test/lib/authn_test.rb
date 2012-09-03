@@ -7,6 +7,6 @@ class TestAuthN < MiniTest::Unit::TestCase
   end
 
   def test_that_AuthN_is_defined
-    assert(defined?(:AuthN))
+    assert(defined?(AuthN))
   end
 end
