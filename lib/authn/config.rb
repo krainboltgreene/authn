@@ -5,8 +5,8 @@ module AuthN
 
   class Config < AltStruct
     DEFAULTS = {
-      account_klass: :Account,
       password_digest_method: :password_digest,
+      account_klass: "Account",
       login_password_key: :password,
       model_id_method: :id,
       model_critera_method: :where,
