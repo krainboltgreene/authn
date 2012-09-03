@@ -40,7 +40,6 @@ class Account < ActiveRecord::Base
   validates :password, length: 10..1024
 
   attr_accessible :email
-  attr_accessible :password, :password_confirmation
 end
 ```
 
@@ -79,7 +78,7 @@ class Account < ActiveRecord::Base
 
   has_authentication
   has_password_recovery mailer: PasswordRecoveryMailer
-  has_activation mailer: ActivationMailer, on_create: false
+  has_activation mailer: "ActivationMailer", on_create: false
   has_login_protection maximum: 3, redirect: { controller: :accounts, action: :maximum_login_failure }
   has_secure_password
 
@@ -87,7 +86,6 @@ class Account < ActiveRecord::Base
   validates :password, length: 10..1024
 
   attr_accessible :email
-  attr_accessible :password, :password_confirmation
 end
 ```
 
