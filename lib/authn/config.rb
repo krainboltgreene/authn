@@ -1,10 +1,10 @@
 module AuthN
   def self.config
-    @config ||= Config.new Config::DEFAULTS
+    @config ||= Config.new Config.defaults
   end
 
   class Config < AltStruct
-    DEFAULTS = {
+    @@defaults = {
       password_digest_method: :password_digest,
       account_klass: "Account",
       login_password_key: :password,
@@ -12,5 +12,9 @@ module AuthN
       model_critera_method: :where,
       session_key_function: ->(klass) { :"session_#{klass}_id" }
     }
+
+    def self.defaults
+      @@defaults ||= {}
+    end
   end
 end
