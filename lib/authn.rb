@@ -6,4 +6,5 @@ require_relative 'authn/model'
 require_relative 'authn/session'
 
 module AuthN
+
 end

@@ -3,8 +3,7 @@ module AuthN
     @config ||= Config.new Config::DEFAULTS
   end
 
-  class Config
-    include AltStruct::M
+  class Config < AltStruct
     DEFAULTS = {
       account_klass: :Account,
       password_digest_method: :password_digest,
