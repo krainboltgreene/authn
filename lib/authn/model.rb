@@ -5,9 +5,8 @@ module AuthN
     end
 
     module ClassMethods
-      def has_authentication(o = {})
-        options = AuthN.config.table.any? ? o.merge!(AuthN.config) : o
-        config.merge! options
+      def has_authentication(options = {})
+        merge_config_with options
       end
 
       def config=(options)
@@ -37,6 +36,12 @@ module AuthN
         # Return instance if account was found and password matched
         # Return false if account was found and password didn't match
         # Return nil if account wasn't found OR password wasn't given
+      end
+
+      private
+
+      def merge_config_with(options)
+        config.merge! options.merge! AuthN.config
       end
     end
   end
