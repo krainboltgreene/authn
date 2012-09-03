@@ -2,10 +2,6 @@ require 'minitest/autorun'
 require 'helper'
 
 class TestAuthN < MiniTest::Unit::TestCase
-  def setup
-    # Setup logic
-  end
-
   def test_that_things_work
     assert true
   end
