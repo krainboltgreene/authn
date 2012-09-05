@@ -3,7 +3,6 @@ require_relative '../../helper'
 
 class TestAuthNSession < MiniTest::Unit::TestCase
   def setup
-    AuthN.config.account_klass = :Account
     Account.password "12341234"
     @controller = Controller.new
     @controller.session = {}
