@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../../helper'
+require 'helper'
 
 class TestAuthNSession < MiniTest::Unit::TestCase
   def setup
