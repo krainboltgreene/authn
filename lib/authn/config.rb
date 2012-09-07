@@ -14,7 +14,7 @@ module AuthN
     }
 
     def self.defaults
-      @@defaults ||= {}
+      @@defaults
     end
   end
 end
