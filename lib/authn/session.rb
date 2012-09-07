@@ -37,11 +37,11 @@ module AuthN
     end
 
     def generate_session_and_instance_from(instance)
-      instance.tap { instance_and_session instance if instance }
+      instance.tap { |i| instance_and_session i if i }
     end
 
     def instance_and_session(instance)
-      instance.tap { |instance| create_session instance.class, instance }
+      instance.tap { |i| create_session i.class, i }
     end
 
     def create_session(klass, instance)
