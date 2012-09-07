@@ -41,7 +41,7 @@ module AuthN
       private
 
       def merge_config_with(options)
-        config.merge! options.merge! AuthN.config
+        config.merge! AuthN.config.dump.merge options
       end
     end
   end
