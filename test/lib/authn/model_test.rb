@@ -33,16 +33,9 @@ class TestAuthNModel < MiniTest::Unit::TestCase
     assert_equal expected, actual
   end
 
-  # def config=(options)
-  #   @@config = options
-  # end
-  #
-  # def config
-  #   @@config ||= AuthN::Config.new
-  # end
-  def test_model_has_class_wide_config_settings
-    actual =
-    expected =
+  def test_has_authentication_config_merges_into_model_config
+    expected = "User"
+    actual = Account.tap { |a| a.has_authentication account_klass: "User" }.config.account_klass
     assert_equal expected, actual
   end
 
