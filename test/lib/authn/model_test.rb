@@ -7,6 +7,19 @@ class TestAuthNModel < MiniTest::Unit::TestCase
     @account = Account.new
   end
 
+  # def config=(options)
+  #   @@config = options
+  # end
+  #
+  # def config
+  #   @@config ||= AuthN::Config.new
+  # end
+  def test_model_has_class_wide_config_settings
+    expected = AuthN::Config
+    actual = Account.config.class
+    assert_equal expected, actual
+  end
+
   # def has_authentication(options = {})
   #   merge_config_with options
   # end
