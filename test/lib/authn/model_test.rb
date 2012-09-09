@@ -3,6 +3,7 @@ require 'helper'
 
 class TestAuthNModel < MiniTest::Unit::TestCase
   def setup
+    Account.has_authentication
     @account = Account.new
   end
 
