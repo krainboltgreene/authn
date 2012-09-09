@@ -25,7 +25,6 @@ end
 class Account
   include ActiveModel::Model
   include AuthN::Model
-  has_authentication
   has_secure_password
   attr_accessor :password_digest
 
