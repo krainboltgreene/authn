@@ -33,12 +33,6 @@ class TestAuthNModel < MiniTest::Unit::TestCase
     assert_equal expected, actual
   end
 
-  def test_has_autehntication_config_merges_in_model_config
-    actual =
-    expected =
-    assert_equal expected, actual
-  end
-
   # def config=(options)
   #   @@config = options
   # end
