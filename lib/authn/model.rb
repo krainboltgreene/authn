@@ -41,6 +41,7 @@ module AuthN
       private
 
       def merge_config_with(options)
+        options[:account_klass] = name unless options.has_key? :account_klass
         config.merge! AuthN.config.dump.merge options
       end
     end
