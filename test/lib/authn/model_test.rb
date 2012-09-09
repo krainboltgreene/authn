@@ -48,9 +48,8 @@ class TestAuthNModel < MiniTest::Unit::TestCase
   #   end
   # end
   def test_authenticate_returns_instance_if_given_good_credentials
-    actual =
-    expected =
-    assert_equal expected, actual
+    Account.password "12341234"
+    assert Account.authenticate(email: "kurtis@example.com", password: "12341234").is_a? Account
   end
 
   def test_authenticate_returns_false_if_bad_password
