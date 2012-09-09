@@ -28,8 +28,8 @@ class TestAuthNModel < MiniTest::Unit::TestCase
   end
 
   def test_has_authentication_config_combinds_with_default_config
-    actual =
-    expected =
+    expected = "Account"
+    actual = Account.config.account_klass
     assert_equal expected, actual
   end
 
