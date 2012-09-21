@@ -52,15 +52,14 @@ class TestAuthNModel < MiniTest::Unit::TestCase
     assert Account.authenticate(email: "kurtis@example.com", password: "12341234").is_a? Account
   end
 
-  def test_authenticate_returns_false_if_bad_password
-    actual =
-    expected =
-    assert_equal expected, actual
-  end
+  # def test_authenticate_returns_false_if_bad_password
+  #   actual =
+  #   assert_equal expected, actual
+  # end
 
-  def test_authenticate_return_nil_if_no_record_found
-    actual =
-    expected =
-    assert_equal expected, actual
-  end
+  # def test_authenticate_return_nil_if_no_record_found
+  #   actual =
+  #   expected =
+  #   assert_equal expected, actual
+  # end
 end
