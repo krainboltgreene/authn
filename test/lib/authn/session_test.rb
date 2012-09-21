@@ -12,31 +12,31 @@ class TestAuthNSession < MiniTest::Unit::TestCase
   #   generate_session_and_instance_from klass.authenticate identifiers, password
   # end
   def test_that_login_returns_account_given_good_credentials
-    instance = @controller.login email: "kurtis@example.com", password: "12341234"
+    instance = @controller.instance_eval { login email: "kurtis@example.com", password: "12341234" }
     actual = instance.class
     expected = Account
     assert_equal expected, actual
   end
 
   def test_that_login_returns_false_if_bad_password
-    actual = @controller.login email: "kurtis@example.com", password: "12341233"
+    actual = @controller.instance_eval { login email: "kurtis@example.com", password: "12341233" }
     expected = false
     assert_equal expected, actual
   end
 
   def test_that_login_returns_nil_if_no_account_found
-    actual = @controller.login email: "kurti@example.com", password: "12341234"
+    actual = @controller.instance_eval { login email: "kurti@example.com", password: "12341234" }
     expected = nil
     assert_equal expected, actual
   end
 
   def test_that_login_sets_session
-    @controller.login email: "kurtis@example.com", password: "12341234"
+    @controller.instance_eval { login email: "kurtis@example.com", password: "12341234" }
     assert @controller.session[:session_account_id]
   end
 
   def test_that_login_stores_session_account_id
-    instance = @controller.login email: "kurtis@example.com", password: "12341234"
+    instance = @controller.instance_eval { login email: "kurtis@example.com", password: "12341234" }
     actual = @controller.session[:session_account_id]
     expected = instance.id
     assert_equal expected, actual
@@ -46,19 +46,19 @@ class TestAuthNSession < MiniTest::Unit::TestCase
   #   instance_and_session instance
   # end
   def test_that_auto_login_returns_instance
-    instance = @controller.auto_login Account.new
+    instance = @controller.instance_eval { auto_login Account.new }
     actual = instance.class
     expected = Account
     assert_equal expected, actual
   end
 
   def test_that_auto_login_sets_session
-    @controller.auto_login Account.new
+    @controller.instance_eval { auto_login Account.new }
     assert @controller.session.has_key? :session_account_id
   end
 
   def test_that_auto_login_stores_session_account_id
-    instance = @controller.auto_login Account.new
+    instance = @controller.instance_eval { auto_login Account.new }
     actual = @controller.session[:session_account_id]
     expected = instance.id
     assert_equal expected, actual
@@ -71,15 +71,15 @@ class TestAuthNSession < MiniTest::Unit::TestCase
   # end
 
   def test_that_logged_in_returns_true_if_logged_in
-    @controller.login email: "kurtis@example.com", password: "12341234"
-    actual = @controller.logged_in?
+    @controller.instance_eval { login email: "kurtis@example.com", password: "12341234" }
+    actual = @controller.instance_eval { logged_in? }
     expected = true
     assert_equal expected, actual
   end
 
   def test_that_logged_in_returns_false_if_not_logged_in
     @controller.session
-    actual = @controller.logged_in?
+    actual = @controller.instance_eval { logged_in? }
     expected = false
     assert_equal expected, actual
   end
@@ -91,8 +91,8 @@ class TestAuthNSession < MiniTest::Unit::TestCase
   # end
 
   def test_that_logout_empties_the_session
-    @controller.login email: "kurtis@example.com", password: "12341234"
-    @controller.logout
+    @controller.instance_eval { login email: "kurtis@example.com", password: "12341234" }
+    @controller.instance_eval { logout }
     refute @controller.session.has_key? :session_account_id
   end
 end
