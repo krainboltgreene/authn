@@ -14,7 +14,7 @@ In addition you can bring in other behavior sets like:
   * authn-activation: Account activation
   * authn-protection: Failed login protection
   * authn-recovery: Password recovery
-  * rails-authn: Extend Rails with AuthN
+  * authn-rails: Extend Rails with AuthN
 
 Using AuthN
 ===========
@@ -112,7 +112,7 @@ Or install it yourself as:
     $ gem install authn
 
 Looking for instructions on how to setup with Rails?
-Find them over [here](https://github.com/krainboltgreene/rails-authn)
+Find them over [here](https://github.com/krainboltgreene/authn-rails)
 
 
 Contributing
