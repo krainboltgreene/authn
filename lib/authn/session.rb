@@ -1,5 +1,6 @@
 module AuthN
   module Session
+    private
     def login(identifiers, klass = AuthN.config.account_klass)
       generate_session_and_instance_from find_instance_klass(klass).authenticate identifiers
     end
@@ -26,7 +27,9 @@ module AuthN
 
     alias_method :current_account, :current_user
 
-    private
+    def require_login
+      unauthenticated unless logged_in?
+    end
 
     def find_instance_klass(klass)
       Object.const_get klass.capitalize
