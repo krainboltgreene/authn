@@ -3,31 +3,34 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
     <title>AuthN by krainboltgreene</title>
   </head>
 
   <body>
-    <header>
+    <div id="container">
       <div class="inner">
-        <h1>AuthN</h1>
-        <h2>Making Authentication Simple &amp; Lightweight</h2>
-        <a href="https://github.com/krainboltgreene/authn" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
+        <header>
+          <h1>AuthN</h1>
+          <h2>Making Authentication Simple &amp; Lightweight</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/krainboltgreene/authn/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/krainboltgreene/authn/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/krainboltgreene/authn" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
           <p>AuthN is a simplistic and barebones authentication library.
 It only does a few things for you, such as:</p>
 
@@ -48,11 +51,12 @@ It only does a few things for you, such as:</p>
 <p>To start using authn you simply need to install and hook up to your existing "user" model:</p>
 
 <div class="highlight"><pre><span class="c1"># create_table :accounts do |t|</span>
-<span class="c1">#   t.string :email, null: false, default: nil</span>
-<span class="c1">#   t.binary :password_digest, null: false, default: nil</span>
+<span class="c1">#   t.string :email</span>
+<span class="c1">#   t.binary :password_digest</span>
+<span class="c1">#</span>
 <span class="c1">#   t.timestamps</span>
 <span class="c1"># end</span>
-<span class="c1"># add_index :accounts, :email, unique: true</span>
+<span class="c1"># add_index :accounts, :email</span>
 <span class="c1">#</span>
 
 <span class="k">class</span> <span class="nc">Account</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
@@ -65,7 +69,6 @@ It only does a few things for you, such as:</p>
   <span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">10</span><span class="o">.</span><span class="n">.</span><span class="mi">1024</span>
 
   <span class="n">attr_accessible</span> <span class="ss">:email</span>
-  <span class="n">attr_accessible</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
 <span class="k">end</span>
 </pre></div>
 
@@ -75,35 +78,35 @@ Now what about all those addons?
 We'll you can see their own pages, but here's a taste:</p>
 
 <div class="highlight"><pre><span class="c1"># create_table :accounts do |t|</span>
-<span class="c1">#   t.string :email, null: false, default: nil</span>
-<span class="c1">#   t.binary :password_digest, null: false, default: nil</span>
+<span class="c1">#   t.string :email</span>
+<span class="c1">#   t.binary :password_digest</span>
 <span class="c1">#</span>
-<span class="c1">#   t.string :activation_token, default: nil</span>
-<span class="c1">#   t.boolean :activation_state, null: false, default: false</span>
-<span class="c1">#   t.datetime :activation_expires_at, default: nil</span>
+<span class="c1">#   t.string :activation_token</span>
+<span class="c1">#   t.boolean :activation_state, default: false</span>
+<span class="c1">#   t.datetime :activation_expires_at</span>
 <span class="c1">#</span>
-<span class="c1">#   t.string :password_recovery_token, default: nil</span>
-<span class="c1">#   t.datetime :password_recovery_expires_at, default: nil</span>
+<span class="c1">#   t.string :password_recovery_token</span>
+<span class="c1">#   t.datetime :password_recovery_expires_at</span>
 <span class="c1">#</span>
-<span class="c1">#   t.string :login_protection_token, default: nil</span>
-<span class="c1">#   t.datetime :login_protection_expires_at, default: nil</span>
+<span class="c1">#   t.string :login_protection_token</span>
+<span class="c1">#   t.datetime :login_protection_expires_at</span>
 <span class="c1">#   t.integer :login_protection_attempts, default: 0</span>
 <span class="c1">#</span>
 <span class="c1">#   t.timestamps</span>
 <span class="c1"># end</span>
-<span class="c1"># add_index :accounts, :email, unique: true</span>
-<span class="c1"># add_index :accounts, :activation_token, unique: true</span>
+<span class="c1"># add_index :accounts, :email</span>
+<span class="c1"># add_index :accounts, :activation_token</span>
 <span class="c1"># add_index :accounts, :activation_state</span>
-<span class="c1"># add_index :accounts, :password_recovery_token, unique: true</span>
-<span class="c1"># add_index :accounts, :login_protection_token, unique: true</span>
+<span class="c1"># add_index :accounts, :password_recovery_token</span>
+<span class="c1"># add_index :accounts, :login_protection_token</span>
 <span class="c1">#</span>
 
 <span class="k">class</span> <span class="nc">Account</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="kp">include</span> <span class="no">AuthN</span><span class="o">::</span><span class="no">Model</span>
 
   <span class="n">has_authentication</span>
-  <span class="n">has_password_recovery</span> <span class="n">mailer</span><span class="p">:</span> <span class="no">PasswordRecoveryMailer</span>
-  <span class="n">has_activation</span> <span class="n">mailer</span><span class="p">:</span> <span class="no">ActivationMailer</span><span class="p">,</span> <span class="n">on_create</span><span class="p">:</span> <span class="kp">false</span>
+  <span class="n">has_password_recovery</span> <span class="n">mailer</span><span class="p">:</span> <span class="s2">"PasswordRecoveryMailer"</span>
+  <span class="n">has_activation</span> <span class="n">mailer</span><span class="p">:</span> <span class="s2">"ActivationMailer"</span><span class="p">,</span> <span class="n">on_create</span><span class="p">:</span> <span class="kp">false</span>
   <span class="n">has_login_protection</span> <span class="n">maximum</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">redirect</span><span class="p">:</span> <span class="p">{</span> <span class="n">controller</span><span class="p">:</span> <span class="ss">:accounts</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="ss">:maximum_login_failure</span> <span class="p">}</span>
   <span class="n">has_secure_password</span>
 
@@ -111,7 +114,6 @@ We'll you can see their own pages, but here's a taste:</p>
   <span class="n">validates</span> <span class="ss">:password</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">10</span><span class="o">.</span><span class="n">.</span><span class="mi">1024</span>
 
   <span class="n">attr_accessible</span> <span class="ss">:email</span>
-  <span class="n">attr_accessible</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
 <span class="k">end</span>
 </pre></div>
 
@@ -139,7 +141,7 @@ In addition you can either programatically write the "global" configuration or h
 </code></pre>
 
 <p>Looking for instructions on how to setup with Rails?
-Find them over <a href="https://github.com/krainboltgreene/rails-authn">here</a></p>
+Find them over <a href="https://github.com/krainboltgreene/authn-rails">here</a></p>
 
 <h1>Contributing</h1>
 
@@ -176,23 +178,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </code></pre>
         </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/krainboltgreene/authn/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/krainboltgreene/authn/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+        <footer>
+          AuthN is maintained by <a href="https://github.com/krainboltgreene">krainboltgreene</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
 
-          <p class="repo-owner"><a href="https://github.com/krainboltgreene/authn"></a> is maintained by <a href="https://github.com/krainboltgreene">krainboltgreene</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
+        
       </div>
     </div>
-
-  
   </body>
 </html>
