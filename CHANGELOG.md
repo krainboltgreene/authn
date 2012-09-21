@@ -1,6 +1,12 @@
 CHANGELOG
 ---------
 
+3.7.4 / 2012-09-21
+==================
+
+  * Fixing a problem with tests so that they don't fail due to
+    private method calling
+
 3.7.3 / 2012-09-21
 ==================
 
