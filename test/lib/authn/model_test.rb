@@ -54,6 +54,7 @@ class TestAuthNModel < MiniTest::Unit::TestCase
 
   # def test_authenticate_returns_false_if_bad_password
   #   actual =
+  #   expected =
   #   assert_equal expected, actual
   # end
 
