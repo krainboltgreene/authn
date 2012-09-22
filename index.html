@@ -19,7 +19,7 @@
 
         <header>
           <h1>AuthN</h1>
-          <h2>Making Authentication Simple &amp; Lightweight</h2>
+          <h2>Simple, Lightweight, &amp; Easy Authentication for any framework</h2>
         </header>
 
         <section id="downloads" class="clearfix">
@@ -31,7 +31,7 @@
         <hr>
 
         <section id="main_content">
-          <p>AuthN is a simplistic and barebones authentication library.
+          <p>authn is a simplistic and barebones authentication library.
 It only does a few things for you, such as:</p>
 
 <ul>
@@ -45,10 +45,20 @@ It only does a few things for you, such as:</p>
 <li>authn-activation: Account activation</li>
 <li>authn-protection: Failed login protection</li>
 <li>authn-recovery: Password recovery</li>
-<li>rails-authn: Extend Rails with AuthN</li>
+<li>authn-rails: Extend Rails with AuthN</li>
 </ul><h1>Using AuthN</h1>
 
-<p>To start using authn you simply need to install and hook up to your existing "user" model:</p>
+<p><strong>The Model</strong></p>
+
+<p>In order to use AuthN in your model you'll only need to follow a few steps:</p>
+
+<ul>
+<li>ActiveModel's SecurePassword requires the model have an accessor called <code>password_digest</code>. (See schema below, for the ActiveRecord version)</li>
+<li>The <code>AuthN::Model</code> module will need to be included into the model. (See codeblock below)</li>
+<li>The singleton method <code>has_authentication</code> will need to be called.</li>
+<li>The singleton method <code>has_secure_password</code> will need to be called.</li>
+</ul><p>That's it!
+Now for those fun code examples:</p>
 
 <div class="highlight"><pre><span class="c1"># create_table :accounts do |t|</span>
 <span class="c1">#   t.string :email</span>
@@ -74,8 +84,9 @@ It only does a few things for you, such as:</p>
 
 <p>See?
 No muss, no fuss.
-Now what about all those addons?
-We'll you can see their own pages, but here's a taste:</p>
+Of course authn does (and will) provide extras, like activation or rails integration.
+You'll need to read those repositories for more information.
+Here's a taste of what a "fully loaded" model looks like:</p>
 
 <div class="highlight"><pre><span class="c1"># create_table :accounts do |t|</span>
 <span class="c1">#   t.string :email</span>
@@ -106,8 +117,8 @@ We'll you can see their own pages, but here's a taste:</p>
 
   <span class="n">has_authentication</span>
   <span class="n">has_password_recovery</span> <span class="n">mailer</span><span class="p">:</span> <span class="s2">"PasswordRecoveryMailer"</span>
-  <span class="n">has_activation</span> <span class="n">mailer</span><span class="p">:</span> <span class="s2">"ActivationMailer"</span><span class="p">,</span> <span class="n">on_create</span><span class="p">:</span> <span class="kp">false</span>
-  <span class="n">has_login_protection</span> <span class="n">maximum</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">redirect</span><span class="p">:</span> <span class="p">{</span> <span class="n">controller</span><span class="p">:</span> <span class="ss">:accounts</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="ss">:maximum_login_failure</span> <span class="p">}</span>
+  <span class="n">has_activation</span> <span class="n">mailer</span><span class="p">:</span> <span class="s2">"ActivationMailer"</span><span class="p">,</span> <span class="n">on_create_send</span><span class="p">:</span> <span class="kp">false</span>
+  <span class="n">has_login_protection</span> <span class="n">maximum</span><span class="p">:</span> <span class="mi">3</span>
   <span class="n">has_secure_password</span>
 
   <span class="n">validates</span> <span class="ss">:email</span><span class="p">,</span> <span class="n">uniqueness</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="n">presence</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="mi">5</span><span class="o">.</span><span class="n">.</span><span class="mi">255</span>
@@ -117,11 +128,28 @@ We'll you can see their own pages, but here's a taste:</p>
 <span class="k">end</span>
 </pre></div>
 
-<p>You'll notice that there are options after some of the addon singleton methods.
-These are used to overwrite the global configuration.
-authn assumes quite a few things, but never stops you from changing how it works.
-As above you can change how each of your "user" models functions (for say admin recovery emails vs support recovery emails).
-In addition you can either programatically write the "global" configuration or have a <code>authn.yml</code> file ready to be loaded.</p>
+<p>You'll notice that each singleton method can take some options passed to it in the form of a Hash (or similar).
+These options <em>supercede</em> the global config options given by your AuthN config.
+Those options supercede the default config in the gem.</p>
+
+<p><strong>The Controller</strong></p>
+
+<p>Inside your controllers you have access to these methods:</p>
+
+<ul>
+<li>
+<code>login email: "jpublic@mail.com", password: "12341234"</code>, for logging accounts in if the creds match</li>
+<li>
+<code>auto_login Account.find(23)</code>, for automatically logging in a certain account</li>
+<li>
+<code>logged_in?</code> for checking if there's a current user</li>
+<li>
+<code>current_user</code> which returns the current user instance</li>
+<li>
+<code>require_login</code>, which redirects to the <code>unauthorized</code> action if the user isn't logged in</li>
+<li>
+<code>logout</code>, for logging out of the current user</li>
+</ul><p>For more information, check the <a href="/wiki">wiki</a></p>
 
 <h1>Installing AuthN</h1>
 
