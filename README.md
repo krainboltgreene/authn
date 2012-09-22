@@ -19,7 +19,17 @@ In addition you can bring in other behavior sets like:
 Using AuthN
 ===========
 
-To start using authn you simply need to install and hook up to your existing "user" model:
+**The Model**
+
+In order to use AuthN in your model you'll only need to follow a few steps:
+
+  * ActiveModel's SecurePassword requires the model have an accessor called `password_digest`. (See schema below, for the ActiveRecord version)
+  * The `AuthN::Model` module will need to be included into the model. (See codeblock below)
+  * The singleton method `has_authentication` will need to be called.
+  * The singleton method `has_secure_password` will need to be called.
+
+That's it!
+Now for those fun code examples:
 
 ``` ruby
 # create_table :accounts do |t|
@@ -46,8 +56,9 @@ end
 
 See?
 No muss, no fuss.
-Now what about all those addons?
-We'll you can see their own pages, but here's a taste:
+Of course authn does (and will) provide extras, like activation or rails integration.
+You'll need to read those repositories for more information.
+Here's a taste of what a "fully loaded" model looks like:
 
 ``` ruby
 # create_table :accounts do |t|
@@ -79,8 +90,8 @@ class Account < ActiveRecord::Base
 
   has_authentication
   has_password_recovery mailer: "PasswordRecoveryMailer"
-  has_activation mailer: "ActivationMailer", on_create: false
-  has_login_protection maximum: 3, redirect: { controller: :accounts, action: :maximum_login_failure }
+  has_activation mailer: "ActivationMailer", on_create_send: false
+  has_login_protection maximum: 3
   has_secure_password
 
   validates :email, uniqueness: true, presence: true, length: 5..255
@@ -90,11 +101,23 @@ class Account < ActiveRecord::Base
 end
 ```
 
-You'll notice that there are options after some of the addon singleton methods.
-These are used to overwrite the global configuration.
-authn assumes quite a few things, but never stops you from changing how it works.
-As above you can change how each of your "user" models functions (for say admin recovery emails vs support recovery emails).
-In addition you can either programatically write the "global" configuration or have a `authn.yml` file ready to be loaded.
+You'll notice that each singleton method can take some options passed to it in the form of a Hash (or similar).
+These options *supercede* the global config options given by your AuthN config.
+Those options supercede the default config in the gem.
+
+
+**The Controller**
+
+Inside your controllers you have access to these methods:
+
+  * `login email: "jpublic@mail.com", password: "12341234"`, for logging accounts in if the creds match
+  * `auto_login Account.find(23)`, for automatically logging in a certain account
+  * `logged_in?` for checking if there's a current user
+  * `current_user` which returns the current user instance
+  * `require_login`, which redirects to the `unauthorized` action if the user isn't logged in
+  * `logout`, for logging out of the current user
+
+For more information, check the [wiki](/wiki)
 
 Installing AuthN
 ================
