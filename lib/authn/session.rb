@@ -1,6 +1,7 @@
 module AuthN
   module Session
     private
+
     def login(identifiers, klass = AuthN.config.account_klass)
       generate_session_and_instance_from find_instance_klass(klass).authenticate identifiers
     end
