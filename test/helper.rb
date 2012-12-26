@@ -51,5 +51,22 @@ end
 
 class Controller
   include AuthN::Session
-  attr_accessor :session
+  attr_accessor :session, :request
+  
+  def unauthenticated
+    
+  end
+end
+
+class Request
+  attr_accessor :url, :method
+  
+  def initialize(attrs)
+    url = attrs[:url]
+    method = attrs[:method]
+  end
+  
+  def get?
+    method == 'get'
+  end
 end
