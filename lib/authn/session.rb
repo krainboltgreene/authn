@@ -29,7 +29,13 @@ module AuthN
     alias_method :current_account, :current_user
 
     def require_login
+      session[:return_to_url] = request.url if AuthN.config.save_return_to_url && request.get?
       unauthenticated unless logged_in?
+    end
+    
+    def redirect_back_or_to(url, flash_hash = {})
+      redirect_to(session[:return_to_url] || url, :flash => flash_hash)
+      session[:return_to_url] = nil
     end
 
     def find_instance_klass(klass)

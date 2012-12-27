@@ -6,6 +6,7 @@ class TestAuthNSession < MiniTest::Unit::TestCase
     Account.password "12341234"
     @controller = Controller.new
     @controller.session = {}
+    @controller.request = Request.new(url:'http://example.com', method: 'get')
   end
 
   # def login(identifiers, password, klass = AuthN.config.account_klass)
@@ -94,5 +95,17 @@ class TestAuthNSession < MiniTest::Unit::TestCase
     @controller.instance_eval { login email: "kurtis@example.com", password: "12341234" }
     @controller.instance_eval { logout }
     refute @controller.session.has_key? :session_account_id
+  end
+  
+  # def require_login
+  #   session[:return_to_url] = request.url if AuthN.config.save_return_to_url && request.get?
+  #   unauthenticated unless logged_in?
+  # end
+  
+  def test_that_require_login_sets_the_return_to_url
+    @controller.instance_eval { require_login }
+    actual = @controller.session[:return_to_url]
+    expected = @controller.request.url
+    assert_equal expected, actual
   end
 end
