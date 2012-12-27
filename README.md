@@ -16,6 +16,8 @@ In addition you can bring in other behavior sets like:
   * authn-recovery: Password recovery
   * authn-rails: Extend Rails with AuthN
 
+
+
 Using AuthN
 ===========
 
