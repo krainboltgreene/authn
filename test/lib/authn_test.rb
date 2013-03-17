@@ -6,7 +6,7 @@ class TestAuthN < MiniTest::Unit::TestCase
     assert true
   end
 
-  def test_that_AuthN_is_defined
+  def test_that_namespace_defined
     assert(defined?(AuthN))
   end
 end
