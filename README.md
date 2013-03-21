@@ -1,6 +1,14 @@
 AuthN
 -----
 
+  - [![Gem Version](https://badge.fury.io/rb/authn.png)](https://rubygems.org/gems/authn)
+  - [![Code Climate](https://codeclimate.com/github/krainboltgreene/authn.png)](https://codeclimate.com/github/krainboltgreene/authn)
+  - [![Build Status](https://travis-ci.org/krainboltgreene/authn.png)](https://travis-ci.org/krainboltgreene/authn)
+  - [![Dependency Status](https://gemnasium.com/krainboltgreene/authn.png)](https://gemnasium.com/krainboltgreene/authn)
+  - [![Coverage Status](https://coveralls.io/repos/krainboltgreene/authn/badge.png?branch=master)](https://coveralls.io/r/krainboltgreene/authn)
+
+
+
 authn is a simplistic and barebones authentication library.
 It only does a few things for you, such as:
 

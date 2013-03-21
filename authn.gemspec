@@ -1,27 +1,31 @@
-# encoding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+# coding: utf-8
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'authn/version'
+require "authn/version"
 
-Gem::Specification.new do |gem|
-  gem.name          = "authn"
-  gem.version       = AuthN::VERSION
-  gem.authors       = ["Kurtis Rainbolt-Greene"]
-  gem.email         = ["me@kurtisrainboltgreene.name"]
-  gem.summary       = %q{An incredibly bare bones authentication library}
-  gem.description   = gem.summary
-  gem.homepage      = "http://krainboltgreene.github.com/authn"
+Gem::Specification.new do |spec|
+  spec.name          = "authn"
+  spec.version       = AuthN::VERSION
+  spec.authors       = ["Kurtis Rainbolt-Greene"]
+  spec.email         = ["me@kurtisrainboltgreene.name"]
+  spec.summary       = %q{An incredibly bare bones authentication library}
+  spec.description   = spec.summary
+  spec.homepage      = "http://krainboltgreene.github.com/authn"
+  spec.license       = "MIT"
 
-  gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.require_paths = ["lib"]
+  spec.files         = `git ls-files`.split($/)
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
 
   gem.add_runtime_dependency 'activemodel', '~> 3.0'
   gem.add_runtime_dependency 'astruct', '~> 2.9'
   gem.add_runtime_dependency 'bcrypt-ruby', '~> 3.0'
-  gem.add_development_dependency 'yard'
-  gem.add_development_dependency 'kramdown'
-  # gem.add_runtime_dependency 'gemname', '~> 1.0'
-  # gem.add_development_dependency 'gemname', '~> 1.0'
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "minitest"
+  spec.add_development_dependency "yard"
+  spec.add_development_dependency "kramdown"
+  spec.add_development_dependency "pry"
+  spec.add_development_dependency "coveralls"
 end
