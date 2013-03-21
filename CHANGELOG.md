@@ -4,7 +4,7 @@ CHANGELOG
 3.8.4 / 2013-03-20
 ==================
 
-  * Fixing a bug
+  * Fixing a bug with current user getting called
   * Cleaning up documentation
 
 3.7.4 / 2012-09-21

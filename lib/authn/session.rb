@@ -37,7 +37,7 @@ module AuthN
     end
 
     def klass_as_name(klass)
-      klass.name.downcase
+      (klass.respond_to?(:name) ? klass.name : klass).downcase
     end
 
     def generate_session_and_instance_from(instance)
