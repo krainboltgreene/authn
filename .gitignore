@@ -22,19 +22,8 @@
 # Ignores that should be in the global gitignore
 # /*.rbc
 # /.config
-# /.yardoc
-# /InstalledFiles
-# /_yardoc
-# /coverage/
-# /doc/
-# /lib/bundler/man/
+/.yardoc
+/coverage/
+/doc/
 # /rdoc/
 # /spec/reports/
-# /test/tmp/
-# /test/version_tmp/
-
-# Ignore sub-gems
-/lib/authn/activation
-/lib/authn/recovery
-/lib/authn/protection
-/lib/authn/rails
