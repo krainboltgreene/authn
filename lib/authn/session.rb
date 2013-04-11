@@ -1,70 +1,40 @@
 module AuthN
-  module Session
-    private
+  class Session
+    attr_accessor :session, :klass
 
-    def login(identifiers, klass = AuthN.config.account_klass)
-      generate_session_and_instance_from find_instance_klass(klass).authenticate identifiers
+    def initialize(session, klass)
+      self.session = session
+      self.klass = klass
     end
 
-    def auto_login(instance)
-      instance_and_session instance
+    def create(instance)
+      session[key] = instance.send model_id_method
     end
 
-    def logged_in?(instance = nil, klass = AuthN.config.account_klass)
-      klass = instance.class if instance
-      klass = find_instance_klass klass unless instance
-      check_session klass
+    def get
+      session[key]
     end
 
-    def logout(instance = nil, klass = AuthN.config.account_klass)
-      klass = instance.class if instance
-      klass = find_instance_klass klass unless instance
-      destroy_session klass
-    end
-
-    def current_user(klass = AuthN.config.account_klass)
-      @current_user ||= get_session klass_as_name find_instance_klass klass
-    end
-
-    alias_method :current_account, :current_user
-
-    def require_login
-      unauthenticated unless logged_in?
-    end
-
-    def find_instance_klass(klass)
-      Object.const_get klass.capitalize
-    end
-
-    def klass_as_name(klass)
-      (klass.respond_to?(:name) ? klass.name : klass).downcase
-    end
-
-    def generate_session_and_instance_from(instance)
-      instance.tap { |i| instance_and_session i if i }
-    end
-
-    def instance_and_session(instance)
-      instance.tap { |i| create_session i.class, i }
-    end
-
-    def create_session(klass, instance)
-      key = AuthN.config.session_key_function.call klass_as_name klass
-      session[key] = instance.send AuthN.config.model_id_method
-    end
-
-    def destroy_session(klass)
-      key = AuthN.config.session_key_function.call klass_as_name klass
+    def destroy
       session.delete key
     end
 
-    def check_session(klass)
-      get_session(klass).present?
+    def present?
+      get.present?
     end
 
-    def get_session(klass)
-      key = AuthN.config.session_key_function.call klass_as_name klass
-      session[key]
+    private
+
+    def key
+      AuthN.config.session_key_function.call klass_name
+    end
+
+    def klass_name
+      klass.name.downcase
+    end
+
+    def model_id_method
+      AuthN.config.model_id_method
     end
   end
 end

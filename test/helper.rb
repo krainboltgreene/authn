@@ -1,4 +1,11 @@
 require 'authn'
+require "minitest/autorun"
+require "authn"
+
+
+class MiniTestCase < MiniTest::Unit::TestCase
+
+end
 
 module ActiveModel::Model
   def self.included(base)
@@ -50,6 +57,6 @@ end
 
 
 class Controller
-  include AuthN::Session
+  include AuthN::Sessions
   attr_accessor :session
 end
