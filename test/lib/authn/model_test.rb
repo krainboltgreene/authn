@@ -1,4 +1,3 @@
-require 'minitest/autorun'
 require 'helper'
 
 class TestAuthNModel < MiniTest::Unit::TestCase
