@@ -7,7 +7,6 @@ require "mocha/setup"
 require "pry"
 require "authn"
 
-
 class MiniTestCase < MiniTest::Unit::TestCase
 
 end
@@ -37,31 +36,9 @@ end
 class Account
   include ActiveModel::Model
   include AuthN::Model
+
+  has_authentication
   has_secure_password
-  attr_accessor :password_digest
 
-  def self.password(password=nil)
-    if password
-      @password = password
-    else
-      @password
-    end
-  end
-
-  def self.where(hash)
-    account = if hash[:email] == "kurtis@example.com"
-      Account.new(password: password, password_confirmation: password)
-    end
-    [account]
-  end
-
-  def id
-    @id ||= rand(100000)
-  end
-end
-
-
-class Controller
-  include AuthN::Sessions
-  attr_accessor :session
+  attr_accessor :id, :email, :password, :password_digest
 end
