@@ -6,11 +6,11 @@ module AuthN
 
     module ClassMethods
       def has_authentication(options = {})
-        merge_config_with options
+        # merge_config_with options
       end
 
       def config=(options)
-        @@config = options
+        # @@config = options
       end
 
       def config

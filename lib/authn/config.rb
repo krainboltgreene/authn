@@ -1,6 +1,6 @@
 module AuthN
   def self.config
-    @config ||= Config.new Config.defaults
+    @config = Config.new Config.defaults
   end
 
   class Config < AltStruct
